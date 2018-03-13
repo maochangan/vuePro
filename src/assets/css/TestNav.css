@@ -1,0 +1,185 @@
+#TestNav {
+    text-align: center;
+  }
+  .nav-less{
+    width: 1000px;
+    max-width: 1000px;
+    height: 30px;
+    margin: 0 auto;
+    color: red;
+    background-color: rgb(245, 245, 245);
+    line-height: 30px;
+  }
+  .hover-hand:hover{
+    cursor: pointer;
+    color: blue;
+  }
+  .less-left{
+    padding: 0px;
+  }
+  
+  .less-left li{
+    margin: 0 10px;
+    float: left;
+    list-style-type: none;
+  }
+  .less-right li{
+    margin: 0 10px;
+    float: right;
+    list-style-type: none;
+  }
+  .nav{
+    width: 800px;
+    max-width: 1000px;
+    font-size: 30px;
+    display: inline-table;
+  }
+  .nav-btn{
+    margin: 0px 27px;
+  }
+  .logo{
+    float: left;
+  }
+  .logo-img{
+    width: 50px;
+  }
+  footer{
+    width: 1000px;
+    height: 100px;
+    margin: auto ;
+    background-color: rgb(49, 49, 49);
+    color: white;
+  }
+  .footer-nav-ul{
+    padding-left: 0px;
+  }
+  footer li{
+    margin: 10px 20px;
+    margin-bottom: 0px;
+    list-style-type: none;
+    display: inline-table;
+  }
+  footer li a{
+    color: white;
+  }
+  .footer-span{
+    color: white;
+  }
+  .footer-span-img{
+    width: 10px;
+    height: 10px;
+  }
+  .login-div{
+    width: 500px;
+    height: 400px;
+    position: absolute;
+    left:0; right:0; top:0; bottom:0;
+    margin: auto;
+    background-color: white;
+    border: 1px red solid;
+  }
+  .login-close-img{
+    float: right;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+  }
+  .form-input input{
+    width: 300px;
+    height: 30px;
+    margin: 10px auto;
+    border: 1px red solid;
+    opacity: 0.9;
+  }   
+  .form-input input[type="button"]{
+    color: white;
+    background-color: red;
+    opacity: 0.8;
+  }
+  .login-or-regist{
+    padding-left: 30px;
+    border-bottom: 1px red solid;
+    height: 31px;
+  }
+  .login-or-regist li{
+    list-style-type: none;
+    display: inline-table;
+    width: 180px;
+    height: 30px;
+    line-height: 30px;
+  }
+  .login-or-regist li:hover{
+    background-color: palevioletred;
+    color: white;
+    cursor: pointer;
+    border-bottom: 2px red solid;
+  }
+  .get-code{
+    background-color: red;
+    width: 90px;
+  }
+  .login-by-another{
+    width: 300px;
+    height: 50px;
+    display: inline-table;
+  }
+  .login-by-another img{
+    border-radius: 30px;
+    margin: 10px 30px;
+    width: 30px;
+    height: 30px;
+  }
+  .user-server input{
+    margin-left: -50px;
+  }
+  #tuer-false-img{
+    position: absolute;
+    height: 30px;
+    left:350px; right:0; top:-130px; bottom:0;
+    margin: auto;
+  }
+  #mobile-check{
+    position: absolute;
+    height: 30px;
+    left:350px; right:0; top:-210px; bottom:0;
+    margin: auto;
+  }
+  #user-name-check{
+    position: absolute;
+    height: 30px;
+    left:350px; right:0; top:-10px; bottom:0;
+    margin: auto;
+  }
+  #password-check{
+    position: absolute;
+    height: 30px;
+    left:350px; right:0; top:190px; bottom:0;
+    margin: auto;
+  }
+  .qq{
+    background-image: url('./login_fast_new.png');
+    background-position-x: -21.5px;
+    background-position-y: -2.5px;
+    cursor: pointer;
+  }
+  .weixin{
+    background-image: url('./login_fast_new.png');
+    background-position-x: -6.5px;
+    background-position-y: -203.5px;
+    cursor: pointer;
+  }
+  .weibo{
+    background-image: url('./login_fast_new.png');
+    background-position-x: -6.5px;
+    background-position-y: -163.5px;
+    cursor: pointer;
+  }
+  .active-choise{
+    background-color: palevioletred;
+    color: white;
+    cursor: pointer;
+    border-bottom: 2px red solid;
+  }
+  .stop-active{
+    background-color: white;
+  }
