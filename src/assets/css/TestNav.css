@@ -11,6 +11,7 @@
     line-height: 30px;
   }
   .hover-hand:hover{
+    transition: 1s ;
     cursor: pointer;
     color: blue;
   }
@@ -29,13 +30,27 @@
     list-style-type: none;
   }
   .nav{
-    width: 800px;
+    margin-top: 30px;
+    transition: 1s;
+    width: 1000px;
     max-width: 1000px;
     font-size: 30px;
     display: inline-table;
+    line-height: 60px;
+    box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.178);
+    border-radius: 60px;
   }
   .nav-btn{
-    margin: 0px 27px;
+    font-size: 40px;
+    transition: 1s;
+    padding: 0px 27px;
+    border-radius: 40px;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.466);
+  }
+  .nav-btn:hover{
+    color: white;
+    background-color:rgba(255, 0, 0, 0.384);
   }
   .logo{
     float: left;
@@ -70,6 +85,9 @@
     height: 10px;
   }
   .login-div{
+    position:absolute ;
+    z-index:999;
+    top:0;
     width: 500px;
     height: 400px;
     position: absolute;

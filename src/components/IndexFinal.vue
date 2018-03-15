@@ -16,12 +16,12 @@
     </div>
     <div class="nav">
       <div class="logo"><img class="logo-img" alt="logo.png" src="../assets/css/logo.png" /></div>  
-      <router-link to="/" class="nav-btn">首页</router-link>
-      <router-link to="/test" class="nav-btn">页面1</router-link>
-      <router-link to="/UserCenter" class="nav-btn">页面2</router-link>
-      <router-link to="/" class="nav-btn">首页3</router-link>
-      <router-link to="/test" class="nav-btn">页面4</router-link>
-      <router-link to="/UserCenter" class="nav-btn">页面5</router-link>
+      <router-link to="/" class="nav-btn" tag="span">主页</router-link>
+      <router-link to="/second" class="nav-btn" tag="span">Second</router-link>
+      <router-link to="/third" class="nav-btn" tag="span">Third</router-link>
+      <router-link to="/fourth" class="nav-btn" tag="span">Fourth</router-link>
+      <router-link to="/fifth" class="nav-btn" tag="span">Fifth</router-link>
+      <router-link to="/sixth" class="nav-btn" tag="span">Sixth</router-link>
     </div>
     <!-- 模态框 -->
     <div class="login-div" v-show="isShow">
@@ -48,7 +48,7 @@
         <input type="button" value="登入" @click="userLoginByNameWithPsd()" />
         <br />
         <div class="login-by-another">
-          <img class="qq">
+          <img id="qqLoginBtn" @click="toQQLogin()" class="qq">
           <img class="weixin">
           <img class="weibo">
         </div>
@@ -130,6 +130,11 @@ export default {
     this.getUserLoginAddress();
   },
   methods: {
+    toQQLogin(){
+      QC.Login({
+        btnId:"qqLoginBtn"	//插入按钮的节点id
+      });
+    },
     getUserLoginAddress() {
       this.$http
         .get(this.httpRequestAddress + "userController/getUserLoginAddress")
@@ -152,7 +157,7 @@ export default {
     },
     pushToGetCode() {
       if (this.userMobile.search(/^1[3|4|5|8][0-9]\d{4,8}$/)) {
-        this.$toast.top('手机号不正确！');
+        this.$toast.top("手机号不正确！");
       } else {
         this.getCode = 30;
         $("#sendCodeBtn").attr("disabled", "true");
@@ -176,7 +181,7 @@ export default {
               }
             },
             errres => {
-              this.$toast.top('请求失败！');
+              this.$toast.top("请求失败！");
             }
           );
       }
@@ -201,14 +206,14 @@ export default {
               var resCode = res.data.code;
               var resMsg = res.data.message;
               if (resCode === 100) {
-                this.$toast.top('退出成功！');
+                this.$toast.top("退出成功！");
                 this.checkSessionFun();
               } else {
-                this.$toast.top('系统异常！');
+                this.$toast.top("系统异常！");
               }
             },
             errres => {
-              this.$toast.top('请求失败！');
+              this.$toast.top("请求失败！");
             }
           );
       } else {
@@ -233,7 +238,7 @@ export default {
     toUserCenterPage() {
       if (this.checkSession) {
         //TODO
-        this.$toast.top('跳转个人中心');
+        this.$toast.top("跳转个人中心");
       } else {
         this.toUserInfoPage();
       }
@@ -241,7 +246,7 @@ export default {
     toUserMessagePage() {
       if (this.checkSession) {
         //TODO
-        this.$toast.top('跳转消息');
+        this.$toast.top("跳转消息");
       } else {
         this.toUserInfoPage();
       }
@@ -249,7 +254,7 @@ export default {
     toUserCollectPage() {
       if (this.checkSession) {
         //TODO
-        this.$toast.top('跳转收藏');
+        this.$toast.top("跳转收藏");
       } else {
         this.toUserInfoPage();
       }
@@ -257,7 +262,7 @@ export default {
     toUserListPage() {
       if (this.checkSession) {
         //TODO
-        this.$toast.top('跳转订单');
+        this.$toast.top("跳转订单");
       } else {
         this.toUserInfoPage();
       }
@@ -271,14 +276,14 @@ export default {
             var resMsg = res.data.message;
             if (resCode === 100) {
               this.checkSession = true;
-              this.loginInfo = res.data.extend.user.userName + ' 点我' + "登出";
+              this.loginInfo = res.data.extend.user.userName + " 点我" + "登出";
             } else {
               this.checkSession = false;
               this.loginInfo = "请登录";
             }
           },
           errres => {
-            this.$toast.top('请求失败！');
+            this.$toast.top("请求失败！");
           }
         );
     },
@@ -299,29 +304,34 @@ export default {
       this.userPsd = "";
     },
     userLoginByNameWithPsd() {
-      this.$http({
-        method: "post",
-        url: this.httpRequestAddress + "userController/userLoginByNameWithPsd",
-        params: {
-          userName: this.userName,
-          password: this.userPsd
-        }
-      }).then(
-        res => {
-          var resCode = res.data.code;
-          var resMsg = res.data.extend.msg;
-          if (resCode === 100) {
-            this.$toast.top(resMsg);
-            this.checkSessionFun();
-            this.isShow = false;
-          } else {
-            this.$toast.top(resMsg);
+      if (this.userName == "" || this.userPsd == "") {
+        this.$toast.top("用户名密码不能空！");
+      } else {
+        this.$http({
+          method: "post",
+          url:
+            this.httpRequestAddress + "userController/userLoginByNameWithPsd",
+          params: {
+            userName: this.userName,
+            password: this.userPsd
           }
-        },
-        errres => {
-          this.$toast.top('请求失败！');
-        }
-      );
+        }).then(
+          res => {
+            var resCode = res.data.code;
+            var resMsg = res.data.extend.msg;
+            if (resCode === 100) {
+              this.$toast.top(resMsg);
+              this.checkSessionFun();
+              this.isShow = false;
+            } else {
+              this.$toast.top(resMsg);
+            }
+          },
+          errres => {
+            this.$toast.top("请求失败！");
+          }
+        );
+      }
     },
     setCookie() {
       var date = new Date();
@@ -351,7 +361,7 @@ export default {
             }
           },
           errres => {
-            this.$toast.top('请求失败！');
+            this.$toast.top("请求失败！");
           }
         );
     },
@@ -380,7 +390,7 @@ export default {
               }
             },
             errres => {
-              this.$toast.top('请求失败！');
+              this.$toast.top("请求失败！");
             }
           );
       }
@@ -407,7 +417,7 @@ export default {
             }
           },
           errres => {
-            this.$toast.top('请求失败！');
+            this.$toast.top("请求失败！");
           }
         );
     },
@@ -420,11 +430,11 @@ export default {
     },
     toUserRegistService() {
       if (
-        (this.mobileCode != "") &&
-        ($("#checkBoxChecked").is(":checked")) &&
-        (this.mobileCheck == "glyphicon glyphicon-ok") &&
-        (this.userNameCheck == "glyphicon glyphicon-ok") &&
-        (this.passwordCheck == "glyphicon glyphicon-ok")
+        this.mobileCode != "" &&
+        $("#checkBoxChecked").is(":checked") &&
+        this.mobileCheck == "glyphicon glyphicon-ok" &&
+        this.userNameCheck == "glyphicon glyphicon-ok" &&
+        this.passwordCheck == "glyphicon glyphicon-ok"
       ) {
         this.$http({
           method: "post",
@@ -441,17 +451,18 @@ export default {
             var resMsg = res.data.extend.msg;
             if (resCode === 100) {
               this.isShow = false;
+              this.$toast.top(resMsg);
               this.checkSessionFun();
             } else {
               this.$toast.top(resMsg);
             }
           },
           errres => {
-            this.$toast.top('请求失败！');
+            this.$toast.top("请求失败！");
           }
         );
       } else {
-        this.$toast.top('请完善信息！');
+        this.$toast.top("请完善信息！");
       }
     }
   }

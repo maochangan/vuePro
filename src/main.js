@@ -10,8 +10,9 @@ import './assets/css/datatable.css'
 import axios from 'axios'
 import util from './utils/config'
 axios.defaults.withCredentials=true
-import './assets/css/Toast.css';
-import Toast from './utils/Toast';
+import './assets/css/Toast.css'
+import Toast from './utils/Toast'
+
 Vue.use(Toast);
 Vue.prototype.$http = axios
 
