@@ -85,16 +85,15 @@
     height: 10px;
   }
   .login-div{
-    position:absolute ;
+    border-radius: 10px;
+    box-shadow: 3px 3px 500px black;
     z-index:999;
-    top:0;
     width: 500px;
     height: 400px;
-    position: absolute;
+    position: fixed;
     left:0; right:0; top:0; bottom:0;
     margin: auto;
     background-color: white;
-    border: 1px red solid;
   }
   .login-close-img{
     float: right;
@@ -149,6 +148,7 @@
   }
   .user-server input{
     margin-left: -50px;
+    
   }
   #tuer-false-img{
     position: absolute;
@@ -200,4 +200,7 @@
   }
   .stop-active{
     background-color: white;
+  }
+  #searchKeyWordInput{
+    outline: none;
   }
