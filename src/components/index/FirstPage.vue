@@ -88,7 +88,7 @@
       <hr style="margin-top:550px" />
       <div id="goodList">
         <div v-for="(item , index) in items" class="good-info" :key="index">
-          <a href="#">
+          <a :href="'#/Goods/'+ item.id ">
             <div><img :src="item.goodsIndexImgPath" /></div>
             <div class="goods-info-dis">
               <div align="left">{{item.goodsName}}</div>

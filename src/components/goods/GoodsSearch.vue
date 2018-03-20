@@ -14,7 +14,7 @@
     </div>
     <div id="goodList">
       <div v-for="(item , index) in items" class="good-info" :key="index">
-        <a href="#">
+        <a :href="'#/Goods/'+ item.id ">
             <div><img :src="item.goodsIndexImgPath" /></div>
             <div class="goods-info-dis">
               <div align="left">{{item.goodsName}}</div>
@@ -22,6 +22,9 @@
               <div>{{'销量：'+item.goodsSellNum+'/月'}}</div>
             </div>
           </a>
+      </div>
+      <div v-show="isShowMessage">
+        <span style="color:red;font-size:30px; ">没有啦！</span>
       </div>
     </div>
     <div class="to-top" v-show="isShow()">
@@ -47,38 +50,45 @@ export default {
     return {
       msg: "",
       searchBar: "searchBar",
-      searchKeyWord: '',
+      searchKeyWord: "",
       items: [], //基本信息
-      pSize: 16
+      pSize: 16,
+      hasNextPage: false,
+      isShowMessage: false,
     };
   },
   mounted: function() {
     window.addEventListener("scroll", this.changeSearchBar);
-    window.addEventListener("scroll", this.loadingMoreGoodsInfo);
     window.addEventListener("scroll", this.isShow);
-    if(this.$route.params.keyWord == null){
-      this.searchKeyWord = '';
+    window.addEventListener("scroll", this.loadingMoreGoodsInfo);
+    if (this.$route.params.keyWord == null) {
+      this.searchKeyWord = "";
       this.loadingLoad();
-    }else{
+    } else {
       this.searchKeyWord = this.$route.params.keyWord;
       this.loadingLoad();
     }
   },
   methods: {
-    loadingMoreGoodsInfo(){
-    var condit = $(document).scrollTop()>=$(document).height()-$(window).height();
-     if(condit){
-       this.pSize = this.pSize+16;
-       this.loadingLoad(this.pSize);
-     }else{
-       
-     }
+    loadingMoreGoodsInfo() {
+      var condit =
+        $(document).scrollTop() >= $(document).height() - $(window).height();
+      if (condit) {
+        this.pSize = this.pSize + 16;
+        if (this.hasNextPage) {
+          this.loadingLoad(this.pSize);
+          this.isShowMessage = false;
+        } else {
+          this.isShowMessage = true;
+        }
+      } else {
+      }
     },
-    isShow(){
+    isShow() {
       var y = window.pageYOffset;
       if (y > 300) {
         return true;
-      }else{
+      } else {
         return false;
       }
     },
@@ -105,9 +115,12 @@ export default {
             var resCode = res.data.code;
             var resMsg = res.data.message;
             if (resCode === 100) {
+              this.hasNextPage = res.data.extend.pageInfo.hasNextPage;
               this.items = res.data.extend.pageInfo.list;
             } else {
+              this.hasNextPage = false;
               this.$toast.top(res.data.extend.msg);
+              this.items = "";
             }
           },
           errres => {
@@ -117,13 +130,13 @@ export default {
     },
     searchBtn() {
       this.pSize = 16;
-      window.scrollTo(0,350);
+      window.scrollTo(0, 350);
       this.loadingLoad(this.pSize);
     },
-    toTop(){
-      window.scrollTo(0,0);
+    toTop() {
+      window.scrollTo(0, 0);
     }
-  }
+  },
 };
 </script>
 
@@ -248,16 +261,16 @@ export default {
   font-style: oblique;
   text-decoration: line-through;
 }
-.to-top{
+.to-top {
   position: fixed;
   right: 5px;
   bottom: 200px;
   width: 50px;
   height: 100px;
 }
-.to-top-a{
+.to-top-a {
   margin: 10px auto;
-  box-shadow: 2px 2px 50px black;
+  box-shadow: 2px 2px 50px rgba(0, 0, 0, 0.144);
   font-size: 10px;
   line-height: 50px;
   color: red;

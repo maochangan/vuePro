@@ -9,7 +9,10 @@ import fifthPage from '@/components/index/FifthPage'
 import SixthPage from '@/components/index/SixthPage'
 import Index from '@/components/index/Index'
 import GoodsSearch from '@/components/goods/GoodsSearch'
-
+import GoodsInfo from '@/components/goods/GoodsInfo'
+import GoodsImageInfo from '@/components/goods/GoodsImageInfo'
+import GoodsWordInfo from '@/components/goods/GoodsWordInfo'
+import GoodsCommitInfo from '@/components/goods/GoodsCommitInfo'
 
 Vue.use(Router)
 
@@ -27,6 +30,28 @@ export default new Router({
           name: 'Search',
           path: '/Search',
           component: GoodsSearch,
+        },
+        {
+          name: 'GoodsInfo',
+          path: '/Goods/:id',
+          component: GoodsInfo,
+          children: [
+            {
+              name: 'GoodsImageInfo',
+              path: '/Goods/:id/',
+              component: GoodsImageInfo
+            },
+            {
+              name: 'GoodsWordInfo',
+              path: '/Goods/:id/GoodsWordInfo',
+              component: GoodsWordInfo
+            },
+            {
+              name: 'GoodsCommitInfo',
+              path: '/Goods/:id/GoodsCommitInfo',
+              component: GoodsCommitInfo
+            }
+          ]
         },
         {
           path: '/Second',
