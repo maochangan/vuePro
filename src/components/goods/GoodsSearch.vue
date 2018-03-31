@@ -122,6 +122,7 @@ export default {
               this.$toast.top(res.data.extend.msg);
               this.items = "";
             }
+            return false
           },
           errres => {
             this.$toast.top("请求失败！");
@@ -135,7 +136,7 @@ export default {
     },
     toTop() {
       window.scrollTo(0, 0);
-    }
+    },
   },
 };
 </script>
@@ -223,7 +224,7 @@ export default {
 }
 .search-condition {
   width: 1000px;
-  height: 500px;
+  height: 200px;
   border: 1px red solid;
 }
 .good-info {
